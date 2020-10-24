@@ -25,6 +25,7 @@
     "postinstall": "yarn bootstrap",
     "prettify": "prettier --write --parser typescript --tab-width 2 --use-tabs false \"packages/**/+(src|test)/**/*.ts\"",
     "test:browsers": "karma start --single-run --browsers Chrome,Firefox,Edge",
+    "test:ci": "npm run test:node && npm run test:chrome:ci && npm run test:firefox",
     "test:chrome:ci": "karma start --single-run --browsers ChromeHeadlessCI karma.conf.js",
     "test:chrome:debug": "karma start --auto-watch --no-single-run --browsers=Chrome",
     "test:chrome": "karma start --single-run --browsers=Chrome",
