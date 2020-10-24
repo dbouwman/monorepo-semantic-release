@@ -1,3 +1,5 @@
+os: linux
+dist: xenial
 language: node_js
 node_js: 
   # - '12'
@@ -38,6 +40,8 @@ jobs:
       name: "Build and deploy docs to gh-pages"
       if: branch = master
       node_js: lts/*
+      # skip the script step to avoid re-running tests
+      script: skip
       before_deploy:
         - npm run docs:build
       deploy:
