@@ -1,0 +1,45 @@
+{
+  "name": "new-package",
+  "version": "0.0.1-alpha",
+  "description": "TODO: Add Description",
+  "main": "dist/node/index.js",
+  "unpkg": "dist/umd/new-package.umd.min.js",
+  "module": "dist/esm/index.js",
+  "js:next": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "license": "Apache-2.0",
+  "files": [
+    "dist/**"
+  ],
+  "devDependencies": {
+    "typescript": "^4.0.3"
+  },
+  "peerDependencies": {
+   
+  },
+  "dependencies": {
+    "tslib": "^2.0.3"
+  },
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "npm run build:node && npm run build:umd && npm run build:esm",
+    "build:esm": "tsc -p ./tsconfig.json --module esnext --outDir ./dist/esm --declaration",
+    "build:umd": "rollup -c ../../support/umd-base-profile.js && rollup -c ../../support/umd-production-profile.js",
+    "build:node": "tsc -p ./tsconfig.json --module commonjs --outDir ./dist/node",
+    "dev:esm": "tsc -w --module esnext --outDir ./dist/esm --declaration",
+    "dev:umd": "rollup -w -c ../../support/umd-base-profile.js",
+    "dev:node": "tsc -w --module commonjs --outDir ./dist/node"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "contributors": [],
+  "bugs": {
+    "url": "https://github.com/<owner>/<repo>/issues"
+  },
+  "homepage": "https://github.com/<owner>/<repo>#readme",
+  "keywords": [
+    "typescript",
+    "ES6"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "monorepo-semantic-release",
+  "includeVersion": true,
+  "mode": "modules",
+  "exclude": "**/*.test.ts",
+  "module": "es6",
+  "ignoreCompilerErrors": true,
+  "out": "docs/build",
+  "hideGenerator": true,
+  "theme": "pages-plugin",
+  "readme": "README.md"
+}

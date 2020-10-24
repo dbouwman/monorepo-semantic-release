@@ -1,0 +1,52 @@
+{
+  "name": "package-b",
+  "version": "0.0.1-alpha",
+  "description": "Package B",
+  "main": "dist/node/index.js",
+  "unpkg": "dist/umd/package-b.umd.min.js",
+  "module": "dist/esm/index.js",
+  "js:next": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "author": "Esri",
+  "license": "Apache-2.0",
+  "files": [
+    "dist/**"
+  ],
+  "devDependencies": {
+    
+    "typescript": "^4.0.3"
+  },
+  "peerDependencies": {
+    
+  },
+  "dependencies": {
+    "tslib": "^2.0.3"
+  },
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "npm run build:node && npm run build:umd && npm run build:esm",
+    "build:esm": "tsc -p ./tsconfig.json --module esnext --outDir ./dist/esm --declaration",
+    "build:umd": "rollup -c ../../support/umd-base-profile.js && rollup -c ../../support/umd-production-profile.js",
+    "build:node": "tsc -p ./tsconfig.json --module commonjs --outDir ./dist/node",
+    "dev:esm": "tsc -w --module esnext --outDir ./dist/esm --declaration",
+    "dev:umd": "rollup -w -c ../../support/umd-base-profile.js",
+    "dev:node": "tsc -w --module commonjs --outDir ./dist/node"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "contributors": [
+    {
+      "name": "Dave Bouwman",
+      "email": "dbouwman@esri.com"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/dbouwman/monorepo-semantic-release/issues"
+  },
+  "homepage": "https://github.com/dbouwman/monorepo-semantic-release#readme",
+  "keywords": [
+    "typescript",
+    "ES6"
+  ]
+}
