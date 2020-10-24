@@ -38,5 +38,4 @@ jobs:
       deploy: 
         provider: script
         skip_cleanup: true
-        script:
-          npm semantic-release -d
+        script: npm semantic-release -d
