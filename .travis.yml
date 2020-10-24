@@ -30,12 +30,12 @@ branches:
     - master
 jobs: 
   include:
-    if: branch = master
     - stage: release
+      if: branch = master
       node_js: lts/*
       # skip the script step to avoid re-running tests
       script: skip
       deploy: 
         provider: script
-        skip_cleanup: true
+        cleanup: false
         script: npm semantic-release -d
