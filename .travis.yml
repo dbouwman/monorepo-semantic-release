@@ -24,7 +24,7 @@ cache:
 #     - master
 jobs: 
   include:
-    - stage: test
+    - stage: test and coverage
       name: "Run Tests and Coverage"
       before_script:
         - yarn bootstrap
@@ -36,8 +36,18 @@ jobs:
       addons:
         chrome: stable
         firefox: latest
-    - stage: docs
-      name: "Build and deploy docs to gh-pages"
+    - stage: semantic release
+      name: "Semanitc Release"
+      if: branch = master
+      node_js: lts/*
+      # skip the script step to avoid re-running tests
+      script: skip
+      deploy: 
+        provider: script
+        skip_cleanup: true
+        script: yarn release:ci
+    - stage: deploy docs
+      name: "Build and deploy docs post-release"
       if: branch = master
       node_js: lts/*
       # skip the script step to avoid re-running tests
@@ -50,13 +60,4 @@ jobs:
         local_dir: docs/build
         target_branch: gh-pages
         skip_cleanup: true
-    - stage: release
-      name: "Semanitc Release"
-      if: branch = master
-      node_js: lts/*
-      # skip the script step to avoid re-running tests
-      script: skip
-      deploy: 
-        provider: script
-        skip_cleanup: true
-        script: npx semantic-release -d
+    

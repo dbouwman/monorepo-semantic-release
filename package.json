@@ -34,8 +34,8 @@
     "test:node:debug": "inspect jasmine --config=jasmine.json",
     "test:node": "jasmine --config=jasmine.json",
     "test": "npm run lint && npm run test:node && npm run test:chrome",
-    "sr": "semantic-release",
-    "sr:dry": "semantic-release -d"
+    "release:ci": "semantic-release",
+    "release:ci:dry": "semantic-release -d"
   },
   "keywords": [
     "monorepo",
