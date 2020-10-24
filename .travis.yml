@@ -28,3 +28,15 @@ addons:
 branches:
   only:
     - master
+jobs: 
+  include:
+    if: branch = master
+    -stage: release
+      node_js: lts/*
+      # skip the script step to avoid re-running tests
+      script: skip
+      deploy: 
+        provider: script
+        skip_cleanup: true
+        script:
+          npm semantic-release -d
