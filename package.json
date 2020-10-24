@@ -1,6 +1,6 @@
 {
   "name": "monorepo-semantic-release",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.0-development",
   "description": "Baseline for a typescript monorepo with typedoc, semantic-release etc",
   "main": "index.js",
   "workspaces": [
@@ -32,7 +32,8 @@
     "test:firefox": "karma start --single-run --browsers=Firefox",
     "test:node:debug": "inspect jasmine --config=jasmine.json",
     "test:node": "jasmine --config=jasmine.json",
-    "test": "npm run lint && npm run test:node && npm run test:chrome"
+    "test": "npm run lint && npm run test:node && npm run test:chrome",
+    "semantic-release": "semantic-release"
   },
   "keywords": [
     "monorepo",
@@ -49,6 +50,7 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^11.0.0",
     "@commitlint/prompt": "^11.0.0",
+    "@jedmao/semantic-release-npm-github-config": "^1.0.9",
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
@@ -108,5 +110,9 @@
     "commitizen": {
       "path": "cz-lerna-changelog"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dbouwman/monorepo-semantic-release.git"
   }
 }
