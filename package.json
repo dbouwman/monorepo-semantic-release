@@ -1,6 +1,6 @@
 {
   "name": "monorepo-semantic-release",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "Baseline for a typescript monorepo with typedoc, semantic-release etc",
   "main": "index.js",
   "workspaces": [
