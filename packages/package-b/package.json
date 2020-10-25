@@ -1,5 +1,5 @@
 {
-  "name": "package-b",
+  "name": "msr-test-package-b",
   "version": "0.0.1-alpha",
   "description": "Package B",
   "main": "dist/node/index.js",
@@ -13,8 +13,11 @@
     "dist/**"
   ],
   "devDependencies": {
-    
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.3",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.0.7",
+    "@semantic-release/npm": "^7.0.5"
   },
   "peerDependencies": {
     

@@ -1,10 +1,10 @@
 {
   "name": "monorepo-semantic-release",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Baseline for a typescript monorepo with typedoc, semantic-release etc",
   "main": "index.js",
   "workspaces": [
-    "packages/**"
+    "packages/*"
   ],
   "private": true,
   "scripts": {
@@ -34,7 +34,7 @@
     "test:node:debug": "inspect jasmine --config=jasmine.json",
     "test:node": "jasmine --config=jasmine.json",
     "test": "npm run lint && npm run test:node && npm run test:chrome",
-    "release:ci": "semantic-release",
+    "release:ci": "multi-semantic-release --debug",
     "release:ci:dry": "semantic-release -d"
   },
   "keywords": [
@@ -52,10 +52,15 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^11.0.0",
     "@commitlint/prompt": "^11.0.0",
-    "@jedmao/semantic-release-npm-github-config": "^1.0.9",
+    "@qiwi/multi-semantic-release": "^3.8.5",
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "9.0.0",
+    "@semantic-release/github": "7.0.7",
+    "@semantic-release/npm": "7.0.5",
     "@types/fetch-mock": "^7.3.2",
     "@types/jasmine": "^3.5.11",
     "@types/node": "^10.17.0",
@@ -91,7 +96,6 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.27.3",
-    "semantic-release": "^17.2.1",
     "sinon": "^9.2.0",
     "ts-node": "^9.0.0",
     "tsdoc": "^0.0.4",
