@@ -1,5 +1,10 @@
 # Monorepo Auto-Release
 
+Background reading: https://dev.to/antongolub/the-chronicles-of-semantic-release-and-monorepos-5cfc
+
+
+
+
 Extends `monorepo-semantic-release` to have full `semantic-release` tooling
 
 

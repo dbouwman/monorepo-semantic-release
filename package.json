@@ -108,7 +108,11 @@
     "isomorphic-form-data": "^2.0.0",
     "typescript": "^4.0.3"
   },
-  
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "config": {
     "commitizen": {
       "path": "cz-lerna-changelog"
