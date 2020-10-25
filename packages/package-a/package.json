@@ -1,6 +1,6 @@
 {
   "name": "msr-test-package-a",
-  "version": "0.0.1-alpha",
+  "version": "1.0.0",
   "description": "Package A",
   "main": "dist/node/index.js",
   "unpkg": "dist/umd/package-a.umd.min.js",
@@ -19,9 +19,7 @@
     "@semantic-release/github": "^7.0.7",
     "@semantic-release/npm": "^7.0.5"
   },
-  "peerDependencies": {
-   
-  },
+  "peerDependencies": {},
   "dependencies": {
     "tslib": "^2.0.3"
   },
