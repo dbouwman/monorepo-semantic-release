@@ -15,7 +15,7 @@ describe("Greeter", () => {
   });
   it("should greet by name from Tom", () => {
     expect(greetFromTom("rob")).toBe(
-      "Hello rob, this is Tom, and this is an update",
+      "Hello rob, this is Tom, and I welcome our robot overlords",
       "should greet by name from Tom"
     );
   });

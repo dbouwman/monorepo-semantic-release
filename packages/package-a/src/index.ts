@@ -11,5 +11,5 @@ export function greetFromDave(name: string): string {
 }
 
 export function greetFromTom(name: string): string {
-  return `Hello ${name}, this is Tom, and this is an update`;
+  return `Hello ${name}, this is Tom, and I welcome our robot overlords`;
 }
