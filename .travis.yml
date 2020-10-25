@@ -21,17 +21,16 @@ jobs:
       addons:
         chrome: stable
         firefox: latest
-    # TEMP: Debug MSR
-    # - stage: semantic release
-    #   name: "Semanitc Release"
-    #   if: branch = master
-    #   node_js: lts/*
-    #   # skip the script step to avoid re-running tests
-    #   script: skip
-    #   deploy: 
-    #     provider: script
-    #     skip_cleanup: true
-    #     script: yarn release:ci
+    - stage: semantic release
+      name: "Semanitc Release"
+      if: branch = master
+      node_js: lts/*
+      # skip the script step to avoid re-running tests
+      script: skip
+      deploy: 
+        provider: script
+        skip_cleanup: true
+        script: yarn release:ci
     # - stage: deploy docs
     #   name: "Build and deploy docs post-release"
     #   if: branch = master
