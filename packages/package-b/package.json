@@ -1,6 +1,6 @@
 {
   "name": "msr-test-package-b",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Package B",
   "main": "dist/node/index.js",
   "unpkg": "dist/umd/package-b.umd.min.js",
@@ -22,7 +22,7 @@
   "peerDependencies": {},
   "dependencies": {
     "tslib": "^2.0.3",
-    "msr-test-package-a": "1.1.1"
+    "msr-test-package-a": "1.1.2"
   },
   "scripts": {
     "prepare": "npm run build",

@@ -1,3 +1,18 @@
+## msr-test-package-b [1.0.3](https://github.com/dbouwman/monorepo-semantic-release/compare/msr-test-package-b@1.0.2...msr-test-package-b@1.0.3) (2020-10-25)
+
+
+### Bug Fixes
+
+* **msr-test-package-a:** robots are best ([4a94ea7](https://github.com/dbouwman/monorepo-semantic-release/commit/4a94ea7acab4af348562be2ebbc8651ea5060309))
+
+
+
+
+
+### Dependencies
+
+* **msr-test-package-a:** upgraded to 1.1.2
+
 ## msr-test-package-b [1.0.2](https://github.com/dbouwman/monorepo-semantic-release/compare/msr-test-package-b@1.0.1...msr-test-package-b@1.0.2) (2020-10-25)
 
 
