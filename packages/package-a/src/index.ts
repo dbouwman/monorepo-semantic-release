@@ -9,3 +9,7 @@ export function greet(name: string): string {
 export function greetFromDave(name: string): string {
   return `Hello ${name}, this is Dave`;
 }
+
+export function greetFromTom(name: string): string {
+  return `Hello ${name}, this is Tom`;
+}
