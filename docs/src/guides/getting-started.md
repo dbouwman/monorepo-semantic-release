@@ -1,63 +1,183 @@
-# Getting Started
+# Setting up Semantic Release
 
-## Developers
+Steps to add `semantic-release` to an existing monorepo.
 
-- install git
-- install volta to manage your node versions
-- install yarn, lerna as globals via volta
-- install visual studio code (recommended)
-  - *Windows*: set visual studio code to use git-bash as the terminal, and use that for git operations as we have ensured that commitizen (`yarn c`) works well in that environment
-  - plugins:
-    - Document This - jsdoc generator
-    - eslint - automate linting in the editor
-    - prettier code formatter
-      - ensure you have "Format on save" set in VSCode settings
-- clone repo locally
-- code!
-- commit using `yarn c` or follow the directions below
+## Install Packages
+In the root, install the following packages
 
-## Windows Developers
-- to use volta, you should set your device into "Developer Mode"
-
-## Commits
-Commit messages must follow the "conventional commit" format, and will be rejected if they do not follow this format:
+### Code Coverage for CI
 
 ```sh
-type(scope?): message
+$ yarn add -W -D codecov
 ```
-Type must be one of `build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test`
 
-Scope is optional, but if you put in the `( )`'s then the scope must be a valid package name. Multiple packages can be separated by commas
-
-Breaking changes are denoted with a `!` before the `:`
-
-You can use the command line or tooling to create commits, as long as they follow this format. If they do not, you will recieve an error, and the commit will not be processed.
-
-*Note* Although you could use `--no-verify`, and we recommend using that before doing a rebase, unless you have at least one commit that follows this convention, your PR will be blocked from merging.
-
-
-`git commit` Examples:
+### Husky
+Used to add git hooks, in particular a `commit-msg` hook to lint commit messages
 
 ```sh
-$ git commit -m 'docs: add new section to guide'
-# type: docs, scope: omitted
-# When merged to master, no release will happen, but docs will be deployed
-
-$ git commit -m 'fix(package-a, package-b): update the flux inverter'
-# type: fix, scope: package-a and package-b
-# When merged to master, a PATCH release will happen, docs will be deployed
-
-$ git commit -m 'feat(package-b): add houston adapter'
-# type: feat, scope: package-b
-# When merged to master, a MINOR release will happen, docs will be deployed
-
-$ git commit -m 'fix(package-a)!: fix the greet function and require an additional parameter'
-# type: fix, scope: package-a, ! means a breaking change, and the message
-# When merged to master, a MAJOR release will happen, docs will be deployed
+$ yarn add -W -D husky
 ```
 
-Or you can use `yarn c` which will walk you through the same information using [commitizen](https://commitizen.github.io/cz-cli/)
+### Commit Lint
+Actual linting of the commit logs
+
+```sh
+$ yarn add -W -D @commitlint/cli @commitlint/config-conventional @commitlint/config-lerna-scopes @commitlint/prompt
+```
+
+### Commitizen
+Used to streamline commit messages
+
+```sh
+$ yarn add -W -D commitizen cz-conventional-changelog cz-lerna-changelog
+```
+### Semantic Release
+For a monorepo, we use `@qiwi/multi-semantic-release`, which uses many standard `@semantic-release` packages
+
+```sh
+$ yarn add -W -D @qiwi/multi-semantic-release @semantic-release/changelog @semantic-release/commit-analyzer @semantic-release/git @semantic-release/github @semantic-release/npm
+```
+
+## Release Configuration
+
+The release configuration is in the root and in the individual packages.
+
+In the root, create `.releaserc.json`
+
+```json
+{
+  "branch": "master"
+}
+```
+
+In each of the packages, add this `.release.json`
+
+```json
+{
+  "branch": "master",
+  "verifyConditions": [
+    "@semantic-release/changelog",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ],
+  "prepare": [
+    "@semantic-release/changelog",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ],
+  "publish": [
+    "@semantic-release/npm",
+    "@semantic-release/github"
+  ]
+}
+
+```
+
+## Commit-Lint Configuration
+
+in the root, create `commitlint.config.js`
+
+```js
+const Configuration = {
+  /*
+   * Resolve and load @commitlint/config-conventional from node_modules.
+   * Referenced packages must be installed
+   */
+  extends: ['@commitlint/config-lerna-scopes', '@commitlint/config-conventional'],
+  /*
+   * Resolve and load conventional-changelog-atom from node_modules.
+   * Referenced packages must be installed
+   */
+  // parserPreset: 'conventional-changelog-atom',
+  /*
+   * Resolve and load @commitlint/format from node_modules.
+   * Referenced package must be installed
+   */
+  formatter: '@commitlint/format',
+  /*
+   * Any rules defined here will override rules from @commitlint/config-conventional
+   */
+  rules: {
+    'type-enum': [2, 'always', ['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test']],
+  },
+  /*
+   * Functions that return true if commitlint should ignore the given message.
+   */
+  ignores: [(commit) => commit === ''],
+  /*
+   * Whether commitlint uses the default ignore rules.
+   */
+  defaultIgnores: true,
+};
+
+module.exports = Configuration;
+```
 
 
-## TODO: 
-- add links & details
+## Husky Configuration
+in the root `package.json`
+
+```json
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+```
+
+## Update Travis Jobs
+
+```yml
+os: linux
+dist: xenial
+language: node_js
+node_js: 
+  - '12'
+  - 'lts/*'
+cache:
+  directories:
+  - node_modules
+jobs: 
+  include:
+  # First stage is to test and run coverage
+  # if this fails the other stages won't run
+    - stage: test and coverage
+      name: "Run Tests and Coverage"
+      before_script:
+        - yarn bootstrap
+      script:
+        - travis_retry yarn test:ci
+        - codecov
+      env:
+        - MOZ_HEADLESS=1
+      addons:
+        chrome: stable
+        firefox: latest
+    # If the Test and Coverage stage passes, run the release
+    - stage: semantic release
+      name: "Semanitc Release"
+      if: branch = master
+      node_js: lts/*
+      # skip the script step to avoid re-running tests
+      script: skip
+      deploy: 
+        provider: script
+        skip_cleanup: true
+        script: yarn release:ci
+    # If the release has passed, then generate docs, with the new version numbers
+    - stage: deploy docs
+      name: "Build and deploy docs post-release"
+      if: branch = master
+      node_js: lts/*
+      # skip the script step to avoid re-running tests
+      script: skip
+      before_deploy:
+        - npm run docs:build
+      deploy:
+        provider: pages
+        token: "$GITHUB_TOKEN"
+        local_dir: docs/build
+        target_branch: gh-pages
+        skip_cleanup: true
+    
+```

@@ -31,18 +31,18 @@ jobs:
         provider: script
         skip_cleanup: true
         script: yarn release:ci
-    # - stage: deploy docs
-    #   name: "Build and deploy docs post-release"
-    #   if: branch = master
-    #   node_js: lts/*
-    #   # skip the script step to avoid re-running tests
-    #   script: skip
-    #   before_deploy:
-    #     - npm run docs:build
-    #   deploy:
-    #     provider: pages
-    #     token: "$GITHUB_TOKEN"
-    #     local_dir: docs/build
-    #     target_branch: gh-pages
-    #     skip_cleanup: true
+    - stage: deploy docs
+      name: "Build and deploy docs post-release"
+      if: branch = master
+      node_js: lts/*
+      # skip the script step to avoid re-running tests
+      script: skip
+      before_deploy:
+        - npm run docs:build
+      deploy:
+        provider: pages
+        token: "$GITHUB_TOKEN"
+        local_dir: docs/build
+        target_branch: gh-pages
+        skip_cleanup: true
     

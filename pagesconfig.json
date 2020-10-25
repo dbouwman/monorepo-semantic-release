@@ -10,16 +10,8 @@
           "source": "getting-started.md"
         },
         {
-            "title": "Core Maintainers",
-            "source": "core-maintainers.md"
-        },
-        {
-            "title": "Processor Maintainers",
-            "source": "processor-maintainers.md"
-        },
-        {
-            "title": "Using Solution.js",
-            "source": "consumers.md"
+            "title": "Making Commits",
+            "source": "making-commits.md"
         }
       ]
     }
