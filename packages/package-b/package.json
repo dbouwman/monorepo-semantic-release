@@ -21,7 +21,8 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "tslib": "^2.0.3"
+    "tslib": "^2.0.3",
+    "msr-test-package-a":"1.1.0"
   },
   "scripts": {
     "prepare": "npm run build",

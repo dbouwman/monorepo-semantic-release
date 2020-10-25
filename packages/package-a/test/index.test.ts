@@ -1,4 +1,4 @@
-import { greet, greetFromDave } from "../src/index";
+import { greet, greetFromDave, greetFromTom } from "../src/index";
 
 describe("Greeter", () => {
   it("should greet by name", () => {
@@ -11,6 +11,12 @@ describe("Greeter", () => {
     expect(greetFromDave("rob")).toBe(
       "Hello rob, this is Dave",
       "should greet by name from Dave"
+    );
+  });
+  it("should greet by name from Tom", () => {
+    expect(greetFromTom("rob")).toBe(
+      "Hello rob, this is Tom",
+      "should greet by name from Tom"
     );
   });
 });
