@@ -8,6 +8,6 @@ describe("Greeter", () => {
     );
   });
   it('should call pkg-a fn', () => { 
-    expect(helloify('jupe')).toBe("Hello jupe, this is Tom, and this is an update")
+    expect(helloify('jupe')).toBe("Hello jupe, this is Tom, and I welcome our robot overlords")
   });
 });
