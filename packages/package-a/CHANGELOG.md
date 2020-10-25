@@ -1,3 +1,10 @@
+# msr-test-package-a [1.1.0](https://github.com/dbouwman/monorepo-semantic-release/compare/msr-test-package-a@1.0.0...msr-test-package-a@1.1.0) (2020-10-25)
+
+
+### Features
+
+* **package-a:** add fn ([4b6137a](https://github.com/dbouwman/monorepo-semantic-release/commit/4b6137a3c1a38e6aaaf24168b44e472bb0995bbe))
+
 # msr-test-package-a 1.0.0 (2020-10-25)
 
 
