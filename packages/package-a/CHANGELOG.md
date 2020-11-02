@@ -1,3 +1,10 @@
+## msr-test-package-a [1.1.4](https://github.com/dbouwman/monorepo-semantic-release/compare/msr-test-package-a@1.1.3...msr-test-package-a@1.1.4) (2020-11-02)
+
+
+### Bug Fixes
+
+* **msr-test-package-a:** change tom's greeting to be less skeptical ([0c5db62](https://github.com/dbouwman/monorepo-semantic-release/commit/0c5db6284a4fe3f50abf113414b8a964985257f7))
+
 ## msr-test-package-a [1.1.3](https://github.com/dbouwman/monorepo-semantic-release/compare/msr-test-package-a@1.1.2...msr-test-package-a@1.1.3) (2020-10-29)
 
 
