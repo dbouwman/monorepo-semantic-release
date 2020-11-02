@@ -1,3 +1,13 @@
+# msr-test-package-b [2.0.0](https://github.com/dbouwman/monorepo-semantic-release/compare/msr-test-package-b@1.0.4...msr-test-package-b@2.0.0) (2020-11-02)
+
+
+* feat(msr-test-package-b)!: make msr-test-package-a a peer dependency ([a3b8873](https://github.com/dbouwman/monorepo-semantic-release/commit/a3b8873ed4fbc6c1787244204970faae68bac26c))
+
+
+### BREAKING CHANGES
+
+* Consumers now need to install msr-test-package-a on their own
+
 ## msr-test-package-b [1.0.4](https://github.com/dbouwman/monorepo-semantic-release/compare/msr-test-package-b@1.0.3...msr-test-package-b@1.0.4) (2020-10-29)
 
 
