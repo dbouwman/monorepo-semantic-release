@@ -17,12 +17,14 @@
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/github": "^7.0.7",
-    "@semantic-release/npm": "^7.0.5"
+    "@semantic-release/npm": "^7.0.5",
+    "msr-test-package-a": "^1.1.3"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "msr-test-package-a": "^1.1.0"
+  },
   "dependencies": {
-    "tslib": "^2.0.3",
-    "msr-test-package-a": "1.1.3"
+    "tslib": "^2.0.3"
   },
   "scripts": {
     "prepare": "npm run build",
