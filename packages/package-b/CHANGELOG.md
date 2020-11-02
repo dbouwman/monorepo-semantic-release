@@ -1,3 +1,13 @@
+## msr-test-package-b [2.0.1](https://github.com/dbouwman/monorepo-semantic-release/compare/msr-test-package-b@2.0.0...msr-test-package-b@2.0.1) (2020-11-02)
+
+
+
+
+
+### Dependencies
+
+* **msr-test-package-a:** upgraded to 1.1.4
+
 # msr-test-package-b [2.0.0](https://github.com/dbouwman/monorepo-semantic-release/compare/msr-test-package-b@1.0.4...msr-test-package-b@2.0.0) (2020-11-02)
 
 
