@@ -7,7 +7,9 @@ describe("Greeter", () => {
       "should greet by name"
     );
   });
-  it('should call pkg-a fn', () => { 
-    expect(helloify('jupe')).toBe("Hello jupe, this is Tom, and I am skeptical of our robot overlords")
+  it('should call pkg-a fn', () => {
+    // we should really be stubbing greetFromTom() for this test, but
+    // the following should be resilient to at least some changes to that fn
+    expect(helloify('jupe').indexOf("Hello jupe, this is Tom")).toBe(0)
   });
 });
