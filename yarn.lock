@@ -2035,10 +2035,9 @@
   dependencies:
     "@types/node" ">= 8"
 
-"@qiwi/multi-semantic-release@^3.8.5":
+"@qiwi/multi-semantic-release@dbouwman/multi-semantic-release#f/carat-peer-deps":
   version "3.8.5"
-  resolved "https://registry.yarnpkg.com/@qiwi/multi-semantic-release/-/multi-semantic-release-3.8.5.tgz#14b578e67f3cd4c4cbd503ef4c4b7fd62a537516"
-  integrity sha512-vW4zCJCOc4iCKzLRzl/LjGtFjnk5NUdie61T3sEWMHpJMsguyWV5i1HDhql1TzVuWG9MCHBREyjXFoXNe7ne3w==
+  resolved "https://codeload.github.com/dbouwman/multi-semantic-release/tar.gz/770ff14e78cc0b25ec2d5a5493ebfbcddca03764"
   dependencies:
     bash-glob "^2.0.0"
     blork "^9.2.2"
