@@ -1,3 +1,10 @@
+# msr-test-package-a [1.2.0](https://github.com/dbouwman/monorepo-semantic-release/compare/msr-test-package-a@1.1.4...msr-test-package-a@1.2.0) (2020-11-07)
+
+
+### Features
+
+* **msr-test-package-a:** update greetFromTom ([27fe68e](https://github.com/dbouwman/monorepo-semantic-release/commit/27fe68e421b5604872280f1002a4efbb9aa7ffb9))
+
 ## msr-test-package-a [1.1.4](https://github.com/dbouwman/monorepo-semantic-release/compare/msr-test-package-a@1.1.3...msr-test-package-a@1.1.4) (2020-11-02)
 
 
