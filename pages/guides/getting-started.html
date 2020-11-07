@@ -1,0 +1,283 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Getting Started | monorepo-semantic-release - v1.1.4</title>
+	<meta name="description" content="Documentation for monorepo-semantic-release - v1.1.4">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../assets/css/main.css">
+	<link rel="stylesheet" href="../../assets/css/pages.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../../assets/js/search.json" data-base="../..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../../index.html" class="title">monorepo-semantic-release - v1.1.4</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="getting-started.html">Guides</a>
+				</li>
+				<li>
+					<a href="getting-started.html">Getting Started</a>
+				</li>
+			</ul>
+			<h1>Getting Started</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#setting-up-semantic-release" id="setting-up-semantic-release" style="color: inherit; text-decoration: none;">
+					<h1>Setting up Semantic Release</h1>
+				</a>
+				<p>Steps to add <code>semantic-release</code> to an existing monorepo.</p>
+				<a href="#install-packages" id="install-packages" style="color: inherit; text-decoration: none;">
+					<h2>Install Packages</h2>
+				</a>
+				<p>In the root, install the following packages</p>
+				<a href="#code-coverage-for-ci" id="code-coverage-for-ci" style="color: inherit; text-decoration: none;">
+					<h3>Code Coverage for CI</h3>
+				</a>
+				<pre><code class="language-sh">$ yarn add -W -D codecov</code></pre>
+				<a href="#husky" id="husky" style="color: inherit; text-decoration: none;">
+					<h3>Husky</h3>
+				</a>
+				<p>Used to add git hooks, in particular a <code>commit-msg</code> hook to lint commit messages</p>
+				<pre><code class="language-sh">$ yarn add -W -D husky</code></pre>
+				<a href="#commit-lint" id="commit-lint" style="color: inherit; text-decoration: none;">
+					<h3>Commit Lint</h3>
+				</a>
+				<p>Actual linting of the commit logs</p>
+				<pre><code class="language-sh">$ yarn add -W -D @commitlint/cli @commitlint/config-conventional @commitlint/config-lerna-scopes @commitlint/prompt</code></pre>
+				<a href="#commitizen" id="commitizen" style="color: inherit; text-decoration: none;">
+					<h3>Commitizen</h3>
+				</a>
+				<p>Used to streamline commit messages</p>
+				<pre><code class="language-sh">$ yarn add -W -D commitizen cz-conventional-changelog cz-lerna-changelog</code></pre>
+				<a href="#semantic-release" id="semantic-release" style="color: inherit; text-decoration: none;">
+					<h3>Semantic Release</h3>
+				</a>
+				<p>For a monorepo, we use <code>@qiwi/multi-semantic-release</code>, which uses many standard <code>@semantic-release</code> packages</p>
+				<pre><code class="language-sh">$ yarn add -W -D @qiwi/multi-semantic-release @semantic-release/changelog @semantic-release/commit-analyzer @semantic-release/git @semantic-release/github @semantic-release/npm</code></pre>
+				<a href="#release-configuration" id="release-configuration" style="color: inherit; text-decoration: none;">
+					<h2>Release Configuration</h2>
+				</a>
+				<p>The release configuration is in the root and in the individual packages.</p>
+				<p>In the root, create <code>.releaserc.json</code></p>
+				<pre><code class="language-json">{
+  <span class="hljs-attr">&quot;branch&quot;</span>: <span class="hljs-string">&quot;master&quot;</span>
+}</code></pre>
+				<p>In each of the packages, add this <code>.release.json</code></p>
+				<pre><code class="language-json">{
+  <span class="hljs-attr">&quot;branch&quot;</span>: <span class="hljs-string">&quot;master&quot;</span>,
+  <span class="hljs-attr">&quot;verifyConditions&quot;</span>: [
+    <span class="hljs-string">&quot;@semantic-release/changelog&quot;</span>,
+    <span class="hljs-string">&quot;@semantic-release/npm&quot;</span>,
+    <span class="hljs-string">&quot;@semantic-release/git&quot;</span>
+  ],
+  <span class="hljs-attr">&quot;prepare&quot;</span>: [
+    <span class="hljs-string">&quot;@semantic-release/changelog&quot;</span>,
+    <span class="hljs-string">&quot;@semantic-release/npm&quot;</span>,
+    <span class="hljs-string">&quot;@semantic-release/git&quot;</span>
+  ],
+  <span class="hljs-attr">&quot;publish&quot;</span>: [
+    <span class="hljs-string">&quot;@semantic-release/npm&quot;</span>,
+    <span class="hljs-string">&quot;@semantic-release/github&quot;</span>
+  ]
+}
+</code></pre>
+				<a href="#commit-lint-configuration" id="commit-lint-configuration" style="color: inherit; text-decoration: none;">
+					<h2>Commit-Lint Configuration</h2>
+				</a>
+				<p>in the root, create <code>commitlint.config.js</code></p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> Configuration = {
+  <span class="hljs-comment">/*
+   * Resolve and load @commitlint/config-conventional from node_modules.
+   * Referenced packages must be installed
+   */</span>
+  <span class="hljs-attr">extends</span>: [<span class="hljs-string">&#x27;@commitlint/config-lerna-scopes&#x27;</span>, <span class="hljs-string">&#x27;@commitlint/config-conventional&#x27;</span>],
+  <span class="hljs-comment">/*
+   * Resolve and load conventional-changelog-atom from node_modules.
+   * Referenced packages must be installed
+   */</span>
+  <span class="hljs-comment">// parserPreset: &#x27;conventional-changelog-atom&#x27;,</span>
+  <span class="hljs-comment">/*
+   * Resolve and load @commitlint/format from node_modules.
+   * Referenced package must be installed
+   */</span>
+  <span class="hljs-attr">formatter</span>: <span class="hljs-string">&#x27;@commitlint/format&#x27;</span>,
+  <span class="hljs-comment">/*
+   * Any rules defined here will override rules from @commitlint/config-conventional
+   */</span>
+  <span class="hljs-attr">rules</span>: {
+    <span class="hljs-string">&#x27;type-enum&#x27;</span>: [<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;always&#x27;</span>, [<span class="hljs-string">&#x27;build&#x27;</span>, <span class="hljs-string">&#x27;chore&#x27;</span>, <span class="hljs-string">&#x27;ci&#x27;</span>, <span class="hljs-string">&#x27;docs&#x27;</span>, <span class="hljs-string">&#x27;feat&#x27;</span>, <span class="hljs-string">&#x27;fix&#x27;</span>, <span class="hljs-string">&#x27;perf&#x27;</span>, <span class="hljs-string">&#x27;refactor&#x27;</span>, <span class="hljs-string">&#x27;revert&#x27;</span>, <span class="hljs-string">&#x27;style&#x27;</span>, <span class="hljs-string">&#x27;test&#x27;</span>]],
+  },
+  <span class="hljs-comment">/*
+   * Functions that return true if commitlint should ignore the given message.
+   */</span>
+  <span class="hljs-attr">ignores</span>: [<span class="hljs-function">(<span class="hljs-params">commit</span>) =&gt;</span> commit === <span class="hljs-string">&#x27;&#x27;</span>],
+  <span class="hljs-comment">/*
+   * Whether commitlint uses the default ignore rules.
+   */</span>
+  <span class="hljs-attr">defaultIgnores</span>: <span class="hljs-literal">true</span>,
+};
+
+<span class="hljs-built_in">module</span>.exports = Configuration;</code></pre>
+				<a href="#husky-configuration" id="husky-configuration" style="color: inherit; text-decoration: none;">
+					<h2>Husky Configuration</h2>
+				</a>
+				<p>in the root <code>package.json</code></p>
+				<pre><code class="language-json">  &quot;husky&quot;: {
+    &quot;hooks&quot;: {
+      &quot;commit-msg&quot;: &quot;commitlint -E HUSKY_GIT_PARAMS&quot;
+    }
+  },</code></pre>
+				<a href="#update-travis-jobs" id="update-travis-jobs" style="color: inherit; text-decoration: none;">
+					<h2>Update Travis Jobs</h2>
+				</a>
+				<pre><code class="language-yml"><span class="hljs-attr">os:</span> <span class="hljs-string">linux</span>
+<span class="hljs-attr">dist:</span> <span class="hljs-string">xenial</span>
+<span class="hljs-attr">language:</span> <span class="hljs-string">node_js</span>
+<span class="hljs-attr">node_js:</span> 
+  <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;12&#x27;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;lts/*&#x27;</span>
+<span class="hljs-attr">cache:</span>
+  <span class="hljs-attr">directories:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">node_modules</span>
+<span class="hljs-attr">jobs:</span> 
+  <span class="hljs-attr">include:</span>
+  <span class="hljs-comment"># First stage is to test and run coverage</span>
+  <span class="hljs-comment"># if this fails the other stages won&#x27;t run</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">stage:</span> <span class="hljs-string">test</span> <span class="hljs-string">and</span> <span class="hljs-string">coverage</span>
+      <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;Run Tests and Coverage&quot;</span>
+      <span class="hljs-attr">before_script:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-string">yarn</span> <span class="hljs-string">bootstrap</span>
+      <span class="hljs-attr">script:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-string">travis_retry</span> <span class="hljs-string">yarn</span> <span class="hljs-string">test:ci</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-string">codecov</span>
+      <span class="hljs-attr">env:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-string">MOZ_HEADLESS=1</span>
+      <span class="hljs-attr">addons:</span>
+        <span class="hljs-attr">chrome:</span> <span class="hljs-string">stable</span>
+        <span class="hljs-attr">firefox:</span> <span class="hljs-string">latest</span>
+    <span class="hljs-comment"># If the Test and Coverage stage passes, run the release</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">stage:</span> <span class="hljs-string">semantic</span> <span class="hljs-string">release</span>
+      <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;Semanitc Release&quot;</span>
+      <span class="hljs-attr">if:</span> <span class="hljs-string">branch</span> <span class="hljs-string">=</span> <span class="hljs-string">master</span>
+      <span class="hljs-attr">node_js:</span> <span class="hljs-string">lts/*</span>
+      <span class="hljs-comment"># skip the script step to avoid re-running tests</span>
+      <span class="hljs-attr">script:</span> <span class="hljs-string">skip</span>
+      <span class="hljs-attr">deploy:</span> 
+        <span class="hljs-attr">provider:</span> <span class="hljs-string">script</span>
+        <span class="hljs-attr">skip_cleanup:</span> <span class="hljs-literal">true</span>
+        <span class="hljs-attr">script:</span> <span class="hljs-string">yarn</span> <span class="hljs-string">release:ci</span>
+    <span class="hljs-comment"># If the release has passed, then generate docs, with the new version numbers</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">stage:</span> <span class="hljs-string">deploy</span> <span class="hljs-string">docs</span>
+      <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;Build and deploy docs post-release&quot;</span>
+      <span class="hljs-attr">if:</span> <span class="hljs-string">branch</span> <span class="hljs-string">=</span> <span class="hljs-string">master</span>
+      <span class="hljs-attr">node_js:</span> <span class="hljs-string">lts/*</span>
+      <span class="hljs-comment"># skip the script step to avoid re-running tests</span>
+      <span class="hljs-attr">script:</span> <span class="hljs-string">skip</span>
+      <span class="hljs-attr">before_deploy:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-string">npm</span> <span class="hljs-string">run</span> <span class="hljs-string">docs:build</span>
+      <span class="hljs-attr">deploy:</span>
+        <span class="hljs-attr">provider:</span> <span class="hljs-string">pages</span>
+        <span class="hljs-attr">token:</span> <span class="hljs-string">&quot;$GITHUB_TOKEN&quot;</span>
+        <span class="hljs-attr">local_dir:</span> <span class="hljs-string">docs/build</span>
+        <span class="hljs-attr">target_branch:</span> <span class="hljs-string">gh-pages</span>
+        <span class="hljs-attr">skip_cleanup:</span> <span class="hljs-literal">true</span>
+</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Guides</span>
+					</li>
+					<li class="current pp-nav pp-page">
+						<a href="getting-started.html">Getting <wbr>Started</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="making-commits.html">Making <wbr>Commits</a>
+					</li>
+					<li class="label pp-nav pp-group">
+						<span>API</span>
+					</li>
+					<li class="globals  ">
+						<a href="../../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/package_a.html">package-<wbr>a</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/package_b.html">package-<wbr>b</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="../../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../../assets/js/search.json"><' + '/script>');</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>monorepo-semantic-release - v1.1.4</title>
+	<meta name="description" content="Documentation for monorepo-semantic-release - v1.1.4">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">monorepo-semantic-release - v1.1.4</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>monorepo-semantic-release - v1.1.4</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#monorepo-semantic-release-test-repo" id="monorepo-semantic-release-test-repo" style="color: inherit; text-decoration: none;">
+					<h1>Monorepo Semantic Release Test Repo</h1>
+				</a>
+				<p>This repo exists purely to get semantic-release tooling configured and setup for real projects.</p>
+				<p>Background reading: <a href="https://dev.to/antongolub/the-chronicles-of-semantic-release-and-monorepos-5cfc">https://dev.to/antongolub/the-chronicles-of-semantic-release-and-monorepos-5cfc</a></p>
+				<a href="#about-semantic-release" id="about-semantic-release" style="color: inherit; text-decoration: none;">
+					<h2>About Semantic Release</h2>
+				</a>
+				<p><strong>semantic-release</strong> automates the whole package release workflow including: determining the next version number, generating the release notes and publishing the package.</p>
+				<p>This is a very powerful workflow in that it removes the burden of package releases from the core maintainers of the packages. </p>
+				<a href="#process" id="process" style="color: inherit; text-decoration: none;">
+					<h2>Process</h2>
+				</a>
+				<p>The process works best if a developer makes many incremental commits, but will work even if there is a single commit. There is an onus on the developer to ensure that they structure the commit messages correctly. </p>
+				<p>i.e. if you add a feature, use <code>feat(&lt;package-name&gt;): msg</code>, which will cause the next release of that package to get a minor version bump.
+					if you are just fixing an existing feature, use <code>fix(&lt;package-name&gt;): msg</code>, which will cause the next release fo get a patch version bump.
+				if you make a breaking change, use either <code>fix</code> or <code>feat</code>, with a <code>!</code> before the <code>:</code></p>
+				<p>i.e. <code>git commit -m &#39;feat(pkg-a)!: add callback to fn&#39;</code> which will cause a major bump in the package when it is released.</p>
+				<a href="#flow" id="flow" style="color: inherit; text-decoration: none;">
+					<h3>Flow</h3>
+				</a>
+				<a href="#developer" id="developer" style="color: inherit; text-decoration: none;">
+					<h4>Developer:</h4>
+				</a>
+				<ul>
+					<li><code>$ git pull origin master</code></li>
+					<li><code>$ git checkout -b f/some-feature</code></li>
+				</ul>
+				<p>... add features...</p>
+				<ul>
+					<li><code>$ git commit -m &#39;feat(&lt;pkg-name&gt;): added cool feature&#39;</code></li>
+				</ul>
+				<p>... fix a feature in another package ...</p>
+				<ul>
+					<li><code>$ git commit -m &#39;fix(&lt;other-pkg&gt;): swapped implementation&#39;</code></li>
+					<li><code>$ git push origin f/some-feature</code></li>
+				</ul>
+				<p>... other chore changes ...</p>
+				<ul>
+					<li><code>$ git commit -m &#39;chore: updated some deps&#39;</code></li>
+				</ul>
+				<p>... create pull request ...</p>
+				<a href="#semantic-pull-request-bot" id="semantic-pull-request-bot" style="color: inherit; text-decoration: none;">
+					<h4>Semantic Pull Request Bot:</h4>
+				</a>
+				<ul>
+					<li>verifies that there is <strong>at least one</strong> semantic commit</li>
+				</ul>
+				<a href="#travis-ci" id="travis-ci" style="color: inherit; text-decoration: none;">
+					<h4>Travis-ci</h4>
+				</a>
+				<ul>
+					<li>runs Test and Coverage via <code>yarn test:ci</code></li>
+					<li>runs Release process <code>yarn release:ci</code><ul>
+							<li>creates changelogs for each package, publishes packages to npm</li>
+						</ul>
+					</li>
+					<li>Builds and publishes docs via <code>yarn docs:deploy</code></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Guides</span>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="pages/guides/getting-started.html">Getting <wbr>Started</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="pages/guides/making-commits.html">Making <wbr>Commits</a>
+					</li>
+					<li class="label pp-nav pp-group">
+						<span>API</span>
+					</li>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/package_a.html">package-<wbr>a</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/package_b.html">package-<wbr>b</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.json"><' + '/script>');</script>
+</body>
+</html>
